@@ -1,0 +1,48 @@
+simulation:
+  num_robots: 10
+  max_time_steps: 10000
+  delta_time: 2.0
+  tick_rate: 30  # ticks per second in real-time mode
+
+planner:
+  algorithm: "cooperative_astar"  # cooperative_astar | dijkstra
+  reservation_horizon: 20         # time steps to reserve ahead
+  replan_interval_high: 50        # high-level replan (ticks)
+  replan_interval_low: 10         # low-level replan (ticks)
+  stuck_threshold: 30             # ticks before robot considered stuck
+
+traffic:
+  deadlock_check_interval: 5      # ticks between deadlock checks
+  congestion_hotspot_threshold: 0.75
+  critical_lane_reservation: true
+
+intelligence:
+  weights:
+    distance: 1.0
+    congestion: 1.2
+    safety: 2.0
+    contraflow: 3.0
+    heatmap: 0.8
+  safety_exp_k: 1.5
+  wait_delay_threshold: 10        # ticks; beyond this → reroute
+
+priority:
+  w1_wait_time: 0.4
+  w2_progress: 0.4
+  w3_urgency: 0.2
+
+visualization:
+  window_width: 1200
+  window_height: 800
+  fps: 30
+  node_radius: 12
+  robot_radius: 8
+  show_heatmap: true
+  show_reservations: true
+  show_paths: true
+  show_robot_ids: true
+
+logging:
+  log_file: "simulation.log"
+  metrics_file: "metrics.json"
+  log_level: "INFO"
